@@ -4,19 +4,22 @@ const datosConvertidor = [
     { moneda: "Peso Uruguayo", cantidad: 1, valorAPesosArgentinos: 24.90, valorAReal: 0.24, valorADolaresEstadoUnidenses: 0.02 }
 ];
 
+
+// Función que solicita al usuario la moneda que desea convertir
 function consultarValor() {
     let elegirMoneda = prompt("¿Qué moneda desea elegir? (Dolar, Real, Peso Uruguayo)");
     if (elegirMoneda) {
-        return elegirMoneda.toLowerCase();
+        return elegirMoneda.toLowerCase(); // Retorna la moneda en minúsculas para evitar problemas de comparación
     }
     return "";
-}
+};
 
+// Función que realiza la conversión de la moneda ingresada
 function convertirMoneda(moneda) {
     let monedaSeleccionada = null;
     for (let i = 0; i < datosConvertidor.length; i++) {
         if (datosConvertidor[i].moneda.toLowerCase() === moneda) {
-            monedaSeleccionada = datosConvertidor[i];
+            monedaSeleccionada = datosConvertidor[i]; // Encuentra la moneda seleccionada en el array
             break;
         }
     }
@@ -25,7 +28,7 @@ function convertirMoneda(moneda) {
         let cantidad = parseFloat(prompt(`Ingrese la cantidad de ${monedaSeleccionada.moneda} que desea convertir:`));
         if (isNaN(cantidad) || cantidad <= 0) {
             alert("Cantidad inválida. Intente nuevamente.");
-            iniciarConvertidor();
+            iniciarConvertidor(); // Reinicia el proceso si la cantidad es inválida
             return;
         }
         
@@ -37,18 +40,20 @@ function convertirMoneda(moneda) {
     } else {
         alert("Moneda no reconocida. Intente nuevamente.");
     }
-    iniciarConvertidor();
-}
+    iniciarConvertidor(); // Retorna al inicio después de la conversión
+};
 
+
+// Función principal que inicia el convertidor de monedas
 function iniciarConvertidor() {
     let moneda = consultarValor();
     if (moneda) {
-        convertirMoneda(moneda);
+        convertirMoneda(moneda); // Llama a la función para convertir la moneda seleccionada
     } else {
-        alert("No ingresó una moneda válida.");
-        iniciarConvertidor();
+        alert("No ingresó una moneda válida."); 
+        iniciarConvertidor(); // Reinicia el proceso si no se ingresó una moneda válida
     }
 }
 
-iniciarConvertidor();
+iniciarConvertidor(); // Inicia la ejecución del convertidor de monedas
 
